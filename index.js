@@ -30,7 +30,7 @@ async function run() {
     const [owner, repo] = core.getInput('repository').split('/');
     const number =
       core.getInput('issue_number') === ''
-        ? github.context.issue.number
+        ? context.issue.number
         : parseInt(core.getInput('issue_number'));
 
     if (addLabels.length === 0 && removeLabels.length === 0) {
@@ -43,7 +43,7 @@ async function run() {
       return;
     }
 
-    const client = github.getOctokit(githubToken);
+    const client = getOctokit(githubToken);
 
     const remainingRemove = [];
     for (const label of removeLabels) {
