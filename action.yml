@@ -1,0 +1,30 @@
+name: 'Add/Remove labels action'
+description: 'Add and/or remove labels from a pull-request or issue in a single action. Multiple labels supported.'
+inputs:
+  github_token:
+    description: A GitHub token.
+    required: false
+    default: ${{ github.token }}
+  add:
+    description: A comma separated list of the labels to add.
+    required: false
+  remove:
+    decription: A comma separated list of the labels to remove.
+    required: false
+  repository:
+    description: The owner, slash repository name.
+    required: false
+    default: ${{ github.repository }}
+  issue_number:
+    description: The number of the issue or pull request.
+    required: false
+  fail_on_error:
+    description: Whether the action fails or not when getting errors. [true,false]
+    default: 'false'
+    required: false
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+branding:
+  icon: bookmark
+  color: green
