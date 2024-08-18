@@ -31141,7 +31141,7 @@ async function run() {
     const remainingRemove = [];
     for (const label of removeLabels) {
       try {
-        await client.issues.removeLabel({
+        await client.rest.issues.removeLabel({
           name: label,
           owner,
           repo,
@@ -31157,8 +31157,8 @@ async function run() {
     const remainingAdd = [];
     for (const label of addLabels) {
       try {
-        await client.issues.addLabel({
-          name: label,
+        await client.rest.issues.addLabels({
+          labels: [label],
           owner,
           repo,
           issue_number: issueNumber
@@ -31170,11 +31170,11 @@ async function run() {
     }
 
     if (remainingAdd.length) {
-      throw new Error(`failed to add labels: ${remaining}`);
+      throw new Error(`failed to add labels: ${remainingAdd}`);
     }
 
     if (remainingRemove.length) {
-      throw new Error(`failed to remove labels: ${remaining}`);
+      throw new Error(`failed to remove labels: ${remainingRemove}`);
     }
   } catch (e) {
     core.error(e);
