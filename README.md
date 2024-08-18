@@ -14,10 +14,9 @@ jobs:
     steps:
       - uses: PauMAVA/add-remove-label-action@v1.0.0
         with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           add: label1, label2
           remove: label3, label4
-        env:
-          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
 ```
 Removals are processed first. Then additions are done.
 
