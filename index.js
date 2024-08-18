@@ -28,7 +28,7 @@ async function run() {
     }
       
     const [owner, repo] = core.getInput('repository').split('/');
-    const number =
+    const issueNumber =
       core.getInput('issue_number') === ''
         ? context.issue.number
         : parseInt(core.getInput('issue_number'));
@@ -38,7 +38,7 @@ async function run() {
       return;
     }
 
-    if (!issue_number) {
+    if (!issueNumber) {
       core.setFailed("Cannot infer the target issue parameter!");
       return;
     }
@@ -52,7 +52,7 @@ async function run() {
           name: label,
           owner,
           repo,
-          issue_number: number
+          issue_number: issueNumber
         });
       } catch (e) {
         core.warning(`failed to remove label: ${label}: ${e}`);
@@ -68,7 +68,7 @@ async function run() {
           name: label,
           owner,
           repo,
-          issue_number: number
+          issue_number: issueNumber
         });
       } catch (e) {
         core.warning(`failed to add label: ${label}: ${e}`);
